@@ -1,6 +1,4 @@
-## WHATS POPPIN 
 
-this is my portfolio website :)
 
 <!--
 **mazefrr/mazefrr** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
