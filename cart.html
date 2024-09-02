@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>maaz.</title>
+        <link rel="stylesheet" href="checkout.css">
+        <script src="app.js" defer></script>
+        <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous"></script>
+        <script src="cart.js"></script>
+    </head>
+
+<body>
+    <div class = "hidden">
+        <header class="header">
+            <a href="home.html" class="logo">maaz.</a>
+            <nav class="navbar">
+                <a href="home.html">home</a>
+                <a href="work.html">work</a>
+                <a href="store.html">store</a>
+            </nav>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+        </header>  
+    </div>
+
+    <main class="checkout-container">
+        <section class="order-summary">
+            <div class="product-summary"></div>
+            <div class="total-amount">
+                <p>Total</p>
+                <p class="price">$0.00</p>
+            </div>
+            <div id="checkout-btn-container" style="display: block;">
+                <!-- The button will be inserted here by the script -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="hidden">
+           <div class="footer-content">
+                <div class="social-media-icons">
+                    <i class="fab fa-instagram"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-discord"></i>
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Maaz Syed. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

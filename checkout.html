@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maaz.</title>
+    <link rel="stylesheet" href="checkout.css">
+    <script src="app.js" defer></script>
+    <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous"></script>
+    <script src="cart.js" defer></script>
+</head>
+<body>
+    <div class="hidden">
+        <header class="header">
+            <a href="home.html" class="logo">maaz.</a>
+            <nav class="navbar">
+                <a href="home.html">home</a>
+                <a href="work.html">work</a>
+                <a href="store.html">store</a>
+            </nav>
+            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+        </header>  
+    </div>
+
+    <main class="checkout-container">
+        <section class="payment-section">
+            <div class="express-checkout">
+                <button class="express-btn shop-pay">Shop Pay</button>
+                <button class="express-btn paypal">PayPal</button>
+                <button class="express-btn google-pay">Google Pay</button>
+            </div>
+
+            <div class="or-divider">OR</div>
+            <div class="contact-info">
+                <label for="email">Contact</label>
+                <input type="email" id="email" placeholder="Email or mobile phone number">
+            </div>
+            <div class="billing-address">
+                <label for="country">Payment Info</label>
+                <input type="text" placeholder="Credit card">
+                <input type="text" placeholder="PIN">
+                <label for="country">Billing address</label>
+                <select>
+                    <option value="Canada">Canada</option>
+                    <option value="United States">United States</option>
+                </select>
+                <input type="text" placeholder="First name (optional)">
+                <input type="text" placeholder="Last name">
+                <input type="text" placeholder="Address">
+                <input type="text" placeholder="Apartment, suite, etc. (optional)">
+                <input type="text" placeholder="City">
+                <input type="text" placeholder="State">
+                <input type="text" placeholder="ZIP code">
+            </div>
+            <div id="checkout-btn-container" style="display: block;">
+                <!-- The button will be inserted here by the script -->
+            </div>
+        </section>
+
+        <section class="order-summary">
+            <div class="product-summary"></div>
+            
+            <div class="total-amount">
+                <p>Total</p>
+                <p class="price">$0.00</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="hidden">
+            <div class="footer-content">
+                <div class="social-media-icons">
+                    <i class="fab fa-instagram"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-discord"></i>
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 Maaz Syed. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
