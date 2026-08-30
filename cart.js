@@ -80,17 +80,22 @@ document.addEventListener('DOMContentLoaded', () => {
             productSummary.classList.add('product-summary');
             productSummary.dataset.id = item.id; // Add a data-id attribute for reference
 
+            const imageSrc = item.image.startsWith('assets/') ? item.image : `assets/${item.image}`;
+
             productSummary.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
-                <div class="product-details">
+                <div class="product-thumb">
+                    <img src="${imageSrc}" alt="${item.name}">
+                    <span class="quantity-badge">${item.quantity}</span>
+                </div>
+                <div class="product-info">
                     <h1>${item.name}</h1>
-                    <p class="price">$${(item.price * item.quantity).toFixed(2)}</p>
                     <div class="quantity-controls">
                         <button class="decrease" data-id="${item.id}"><i class="fa-solid fa-square-minus"></i></button>
                         <span class="quantity">${item.quantity}</span>
                         <button class="increase" data-id="${item.id}"><i class="fa-solid fa-square-plus"></i></button>
                     </div>
                 </div>
+                <p class="line-price">$${(item.price * item.quantity).toFixed(2)}</p>
             `;
 
             productSummaryContainer.appendChild(productSummary);
@@ -98,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             totalAmount += item.price * item.quantity;
         });
 
-        // Append the product summaries to the order summary section
         orderSummary.insertBefore(productSummaryContainer, orderSummary.querySelector('.total-amount'));
 
         // Update the total amount

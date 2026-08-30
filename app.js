@@ -28,3 +28,8 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.hidden').forEach((element) => {
     observer.observe(element);
 });
+
+const yearElement = document.getElementById('year');
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+}

@@ -9,62 +9,60 @@
     <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous"></script>
     <script src="cart.js" defer></script>
 </head>
-<body>
-    <div class="hidden">
-        <header class="header">
-            <a href="home.html" class="logo">maaz.</a>
-            <nav class="navbar">
-                <a href="index.html">home</a>
-                <a href="store.html">store</a>
-            </nav>
-            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-        </header>  
+<body class="checkout-page">
+    <div class="checkout-viewport">
+        <div class="hidden">
+            <header class="header">
+                <a href="index.html" class="logo">maaz.</a>
+                <nav class="navbar">
+                    <a href="index.html">home</a>
+                    <a href="store.html">store</a>
+                </nav>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+            </header>
+        </div>
+
+        <main class="checkout-layout">
+            <section class="payment-section">
+                <p class="section-label">Express checkout</p>
+                <div class="express-checkout">
+                    <button class="express-btn shop-pay">Shop Pay</button>
+                    <button class="express-btn paypal">PayPal</button>
+                    <button class="express-btn google-pay">Google Pay</button>
+                </div>
+
+                <div class="or-divider"><span>OR</span></div>
+
+                <div class="contact-info">
+                    <div class="section-header">
+                        <label for="email">Contact</label>
+                        <a href="#" class="section-link">Sign in</a>
+                    </div>
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+
+                <div class="payment-info">
+                    <label>Payment</label>
+                    <p class="section-subtext">All transactions are secure and encrypted.</p>
+                    <div class="card-fields">
+                        <input type="text" placeholder="Card number">
+                        <div class="card-row">
+                            <input type="text" placeholder="Expiration date (MM / YY)">
+                            <input type="text" placeholder="Security code">
+                        </div>
+                        <input type="text" placeholder="Name on card">
+                    </div>
+                </div>
+            </section>
+
+            <aside class="order-summary">
+                <div class="total-amount">
+                    <p>Total</p>
+                    <p class="price">$0.00</p>
+                </div>
+            </aside>
+        </main>
     </div>
-
-    <main class="checkout-container">
-        <section class="payment-section">
-            <div class="express-checkout">
-                <button class="express-btn shop-pay">Shop Pay</button>
-                <button class="express-btn paypal">PayPal</button>
-                <button class="express-btn google-pay">Google Pay</button>
-            </div>
-
-            <div class="or-divider">OR</div>
-            <div class="contact-info">
-                <label for="email">Contact</label>
-                <input type="email" id="email" placeholder="Email or mobile phone number">
-            </div>
-            <div class="billing-address">
-                <label for="country">Payment Info</label>
-                <input type="text" placeholder="Credit card">
-                <input type="text" placeholder="PIN">
-                <label for="country">Billing address</label>
-                <select>
-                    <option value="Canada">Canada</option>
-                    <option value="United States">United States</option>
-                </select>
-                <input type="text" placeholder="First name (optional)">
-                <input type="text" placeholder="Last name">
-                <input type="text" placeholder="Address">
-                <input type="text" placeholder="Apartment, suite, etc. (optional)">
-                <input type="text" placeholder="City">
-                <input type="text" placeholder="State">
-                <input type="text" placeholder="ZIP code">
-            </div>
-            <div id="checkout-btn-container" style="display: block;">
-                <!-- The button will be inserted here by the script -->
-            </div>
-        </section>
-
-        <section class="order-summary">
-            <div class="product-summary"></div>
-            
-            <div class="total-amount">
-                <p>Total</p>
-                <p class="price">$0.00</p>
-            </div>
-        </section>
-    </main>
 
     <footer>
         <div class="hidden">
@@ -73,10 +71,9 @@
                     <i class="fab fa-instagram"></i>
                     <i class="fa-brands fa-x-twitter"></i>
                     <i class="fa-brands fa-discord"></i>
-                    <i class="fab fa-whatsapp"></i>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2024 Maaz Syed. All Rights Reserved.</p>
+                    <p>&copy; <span id="year"></span> Maaz Syed. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
