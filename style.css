@@ -184,14 +184,17 @@
     border-radius: 14px;
     overflow: hidden;
     max-width: 100%;
+    /* A fixed pixel max-height doesn't scale down for narrow screens, which
+       is exactly what forced an extreme, zoomed-in crop on mobile. An
+       aspect-ratio on the frame instead scales proportionally at every
+       width, and matches this image's own ~16:9 ratio, so nothing needs to
+       be cropped or object-fit: contain'd differently per breakpoint. */
+    aspect-ratio: 16 / 9;
 }
 
 .project-image img {
     width: 100%;
-    /* The image's native ratio (~16:9) would otherwise render ~560px tall at
-       full card width - capping the height and cropping with object-fit
-       keeps the card a reasonable size instead of ballooning vertically. */
-    max-height: 400px;
+    height: 100%;
     object-fit: cover;
     display: block;
 }
@@ -239,13 +242,18 @@ section {
 @media (max-width: 768px) {
     .hero {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+    }
+
+    .intro {
+        text-align: center;
     }
 
     .store-card {
         align-self: center;
         width: 100%;
-        max-width: 300px;
+        /* 60% of the desktop cap (300px) */
+        max-width: 180px;
     }
 
     .artwork-display {

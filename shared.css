@@ -9,6 +9,13 @@
 
 html {
     font-size: 80%;
+    /* Mobile Safari (and some other mobile browsers) auto-inflates text
+       size on pages with a small base font-size like this one's, using a
+       readability heuristic that has nothing to do with pinch-zoom. That
+       makes the same clamp()'d sizes render inconsistently against desktop.
+       Disabling it keeps font sizing identical across devices. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 :root {
@@ -332,9 +339,45 @@ footer {
     border-radius: 50%;
     background: var(--toggle-thumb-bg);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    /* Higher than .theme-toggle-icon so the thumb fully covers whichever
+       static track icon it's parked over, instead of that icon's z-index
+       painting through the (visually opaque) thumb. */
+    z-index: 2;
+    /* Both icons inside occupy the same grid cell so they can cross-fade
+       in place, perfectly centered regardless of thumb size. */
+    display: grid;
+    place-items: center;
     /* Default (dark mode): parked on the right, next to the moon */
     transform: translate(calc(var(--track-w) - var(--thumb-size) - 2 * var(--inset)), -50%);
     transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+}
+
+.theme-toggle-thumb-icon {
+    grid-area: 1 / 1;
+    font-size: clamp(0.65rem, 1.4vw, 0.75rem);
+    transition: opacity .35s ease;
+}
+
+/* The thumb itself is always white in both themes, so its icon needs its
+   own fixed, dark colors for contrast - the light/dark track-icon colors
+   (bright in dark mode, dim in light mode) assume a dark or light track
+   background behind them, not a white circle. */
+.theme-toggle-thumb-icon--sun {
+    color: #c98a1c;
+    opacity: 0;
+}
+
+.theme-toggle-thumb-icon--moon {
+    color: #3a3a3c;
+    opacity: 1;
+}
+
+[data-theme="light"] .theme-toggle-thumb-icon--sun {
+    opacity: 1;
+}
+
+[data-theme="light"] .theme-toggle-thumb-icon--moon {
+    opacity: 0;
 }
 
 [data-theme="light"] .theme-toggle-thumb {
