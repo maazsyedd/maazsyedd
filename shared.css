@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+/* The Poppins font is loaded via a <link rel="stylesheet"> in each page's
+   <head> instead of @import here — @import chains block in serial (page
+   CSS -> this file -> the font CSS -> the font file itself), while a
+   sibling <link> lets the browser fetch all of them in parallel. */
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -12,13 +15,82 @@ html {
     --content-max: 1000px;
     --content-gutter: clamp(2rem, 8vw, 5rem);
     --product-image-scale: 75%;
+
+    /* Dark theme (default) */
+    --bg-page: #171717;
+    --bg-elevated: #1c1c1c;
+    --bg-surface: #2c2c2c;
+    --bg-panel: #000000;
+    --bg-header: #171717;
+    --bg-footer: #000000;
+    --input-bg: #2c2c2c;
+
+    --text-primary: #ffffff;
+    --text-secondary: #909090;
+    --text-muted: #aaaaaa;
+    --text-faint: #666666;
+    --text-heading-soft: #424242;
+    --logo-color: #ededed;
+    --nav-link-color: #dadada;
+
+    --border-color: #333333;
+    --border-color-soft: #2a2a2a;
+
+    --accent: rgb(38, 113, 253);
+    --shadow-color: rgba(0, 0, 0, 0.9);
+    --shadow-color-soft: rgba(0, 0, 0, 0.6);
+    --glow-color: rgba(255, 255, 255, 0.9);
+    --button-hover-bg: #ffffff;
+    --button-hover-text: #000000;
+
+    --toggle-track-bg: #3a3a3c;
+    --toggle-thumb-bg: #ffffff;
+    --toggle-sun-color: #6e6e73;
+    --toggle-moon-color: #f5f5f7;
+
+    color-scheme: dark;
+}
+
+[data-theme="light"] {
+    --bg-page: #f5f5f7;
+    --bg-elevated: #ffffff;
+    --bg-surface: #f0f0f2;
+    --bg-panel: #ffffff;
+    --bg-header: #ffffff;
+    --bg-footer: #f0f0f2;
+    --input-bg: #ffffff;
+
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-muted: #6e6e73;
+    --text-faint: #8a8a8e;
+    --text-heading-soft: #3a3a3c;
+    --logo-color: #1d1d1f;
+    --nav-link-color: #3a3a3c;
+
+    --border-color: #d2d2d7;
+    --border-color-soft: #e5e5ea;
+
+    /* Same drop shadow as dark mode (same color/strength) — just black instead of white */
+    --shadow-color: rgba(0, 0, 0, 0.9);
+    --shadow-color-soft: rgba(0, 0, 0, 0.6);
+    --glow-color: rgba(0, 0, 0, 0.9);
+    --button-hover-bg: #000000;
+    --button-hover-text: #ffffff;
+
+    --toggle-track-bg: #e9e9eb;
+    --toggle-thumb-bg: #ffffff;
+    --toggle-sun-color: #ff9f0a;
+    --toggle-moon-color: #c7c7cc;
+
+    color-scheme: light;
 }
 
 body {
-    background-color: #171717;
+    background-color: var(--bg-page);
     scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
-    color: #ffff;
+    color: var(--text-primary);
     font-size: clamp(0.8rem, 1.6vw, 1rem);
     padding: 0;
     margin: 0;
@@ -26,6 +98,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background-color .35s ease, color .35s ease;
 }
 
 body > .hidden {
@@ -41,13 +114,13 @@ body > .hidden {
 }
 
 h1 {
-    color: #424242;
+    color: var(--text-heading-soft);
     font-size: clamp(2rem, 6.4vw, 4.8rem);
     line-height: 1.05;
 }
 
 h2 {
-    color: #ffff;
+    color: var(--text-primary);
     font-size: clamp(2rem, 6.4vw, 4.8rem);
     line-height: 1.05;
 }
@@ -72,19 +145,20 @@ h2 {
     margin: clamp(1.6rem, 4vw, 2rem) auto clamp(4rem, 8vw, 5rem);
     border-radius: 50px;
     padding: clamp(1rem, 2.4vw, 1.25rem) clamp(1.6rem, 4vw, 2.5rem);
-    background: #171717;
+    background: var(--bg-header);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0px 10px 50px #000000;
+    box-shadow: 0px 10px 50px var(--shadow-color);
+    transition: background-color .35s ease, box-shadow .35s ease;
 }
 
 .logo {
     font-size: clamp(1.2rem, 2.4vw, 1.5rem);
-    color: #ededed;
+    color: var(--logo-color);
     text-decoration: none;
     font-weight: 600;
-    transition: .1s ease-out;
+    transition: color .35s ease, transform .1s ease-out;
 }
 
 .navbar {
@@ -97,49 +171,57 @@ h2 {
 .navbar a {
     font-size: clamp(0.875rem, 1.6vw, 1.125rem);
     font-weight: 300;
-    color: #dadada;
+    color: var(--nav-link-color);
     text-decoration: none;
     padding: 0 clamp(0.75rem, 6vw, 3.75rem);
+    transition: color .35s ease;
 }
 
 .navbar a:hover {
     text-decoration: underline;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.85rem, 2vw, 1.4rem);
+}
+
 a:link {
-    color: rgb(255, 255, 255);
+    color: var(--text-primary);
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
 }
 
 header a {
-    color: rgb(38, 113, 253);
+    color: var(--accent);
     transition: .3s ease all;
 }
 
 header a:hover {
-    color: rgb(255, 255, 255);
+    color: var(--text-primary);
     font-family: 'Poppins', sans-serif;
     transform: translateY(-10%);
     transition: .1s ease-out;
 }
 
 header a:active {
-    color: rgb(54, 53, 53);
+    color: var(--text-faint);
     font-family: 'Poppins', sans-serif;
 }
 
 footer {
     margin-top: clamp(2rem, 6vw, 6rem);
-    color: white;
-    background-color: #000000;
+    color: var(--text-primary);
+    background-color: var(--bg-footer);
     width: 100%;
     padding: clamp(0.85rem, 2vw, 1.1rem) 0;
     font-family: "Poppins", sans-serif;
+    transition: background-color .35s ease, color .35s ease;
 }
 
 .footer-content {
-    color: white;
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -159,7 +241,7 @@ footer {
 
 .footer-links a {
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: var(--text-primary);
     font-size: clamp(0.8rem, 2vw, 0.875rem);
 }
 
@@ -176,14 +258,14 @@ footer {
 }
 
 .social-media-icons i {
-    color: rgb(255, 255, 255);
+    color: var(--text-primary);
     font-size: clamp(1.25rem, 3vw, 1.5625rem);
     transform: translateY(20%);
     transition: .3s ease all;
 }
 
 .social-media-icons i:hover {
-    color: #9e9e9e;
+    color: var(--text-secondary);
     transform: translateY(0%);
     transition: .3s ease all;
 }
@@ -193,8 +275,80 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    color: white;
+    color: var(--text-primary);
     font-size: clamp(0.85rem, 2vw, 0.9375rem);
+}
+
+/* Light/dark mode toggle — Apple-inspired oval switch */
+.theme-toggle {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    line-height: 0;
+    flex: 0 0 auto;
+}
+
+.theme-toggle-track {
+    --track-w: clamp(3.2rem, 7vw, 3.7rem);
+    --thumb-size: clamp(1.3rem, 2.8vw, 1.5rem);
+    --inset: clamp(0.2rem, 0.6vw, 0.25rem);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: var(--track-w);
+    height: clamp(1.7rem, 3.6vw, 1.95rem);
+    padding: 0 clamp(0.3rem, 1vw, 0.4rem);
+    border-radius: 999px;
+    background: var(--toggle-track-bg);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+    transition: background-color .35s ease;
+}
+
+.theme-toggle-icon {
+    position: relative;
+    z-index: 1;
+    font-size: clamp(0.7rem, 1.6vw, 0.8rem);
+    transition: color .35s ease;
+}
+
+.theme-toggle-icon--sun {
+    color: var(--toggle-sun-color);
+}
+
+.theme-toggle-icon--moon {
+    color: var(--toggle-moon-color);
+}
+
+.theme-toggle-thumb {
+    position: absolute;
+    top: 50%;
+    left: var(--inset);
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border-radius: 50%;
+    background: var(--toggle-thumb-bg);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    /* Default (dark mode): parked on the right, next to the moon */
+    transform: translate(calc(var(--track-w) - var(--thumb-size) - 2 * var(--inset)), -50%);
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="light"] .theme-toggle-thumb {
+    /* Light mode: parked on the left, next to the sun */
+    transform: translate(0, -50%);
+}
+
+.theme-toggle:hover .theme-toggle-thumb {
+    filter: brightness(1.08);
+}
+
+.theme-toggle:focus-visible .theme-toggle-track {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 @media (max-width: 768px) {
@@ -202,3 +356,368 @@ footer {
         padding: 0 clamp(0.5rem, 3vw, 1.5rem);
     }
 }
+
+/* ==========================================================================
+   Cart item rows, checkout button, and empty state.
+   Moved here from checkout.css so this looks right wherever it's used: the
+   full cart page, the checkout page's order summary, and the cart drawer
+   below (which appears on every page, including ones that never load
+   checkout.css).
+   ========================================================================== */
+
+.product-summary-container {
+    flex: 1;
+    min-height: 0;
+}
+
+.product-summary {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+}
+
+.product-thumb {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.product-thumb img {
+    width: clamp(80px, 12vw, 120px);
+    height: clamp(80px, 12vw, 120px);
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    display: block;
+}
+
+.quantity-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: var(--border-color);
+    color: var(--text-primary);
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    font-weight: 600;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-elevated);
+}
+
+.product-info {
+    min-width: 0;
+}
+
+.product-info h1 {
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 0.4rem;
+    line-height: 1.3;
+}
+
+.product-summary .line-price {
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    color: var(--text-primary);
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-controls button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: 0.2s;
+}
+
+.quantity-controls button:disabled {
+    cursor: not-allowed;
+    opacity: 0.35;
+}
+
+.quantity-controls .remove-item {
+    margin-left: 0.3rem;
+    padding-left: 0.65rem;
+    border-left: 1px solid var(--border-color);
+}
+
+.remove-item i {
+    color: #ff3b30;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.remove-item:hover i {
+    color: #ff6961;
+    transform: scale(1.12);
+}
+
+.quantity-controls .quantity {
+    font-size: clamp(0.75rem, 1.4vw, 0.85rem);
+    color: var(--text-secondary);
+    min-width: 1rem;
+    text-align: center;
+}
+
+.total-amount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    flex-shrink: 0;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.total-amount .price {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.checkout-btn-container {
+    margin-top: 0.75rem;
+    flex-shrink: 0;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: var(--accent);
+    border: none;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #000;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.checkout-btn:hover {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+    box-shadow: 0px 0px 20px var(--glow-color);
+    transform: scale(1.03);
+}
+
+.greyed-checkout-btn {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: var(--border-color);
+    border: none;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    cursor: default;
+}
+
+.greyed-checkout-btn:active {
+    background-color: rgb(205, 52, 52);
+    color: #000;
+    cursor: pointer;
+}
+
+.empty-cart-message {
+    font-size: clamp(0.75rem, 1.4vw, 0.85rem);
+    margin-top: 0.5rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.store-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.store-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Cart icon badge
+   ========================================================================== */
+
+.cart-link {
+    position: relative;
+    display: inline-flex;
+}
+
+.cart-count {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.6rem;
+    min-width: 1.1rem;
+    height: 1.1rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    line-height: 1.1rem;
+    text-align: center;
+    transition: transform .2s ease;
+}
+
+@keyframes cart-icon-bump {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
+.cart-icon-bump {
+    animation: cart-icon-bump .35s ease;
+}
+
+/* ==========================================================================
+   Cart drawer - Apple/Shopify-style slide-out panel, appears on every page.
+   Markup is injected by cart.js so it doesn't need to be duplicated across
+   every HTML file.
+   ========================================================================== */
+
+.cart-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    z-index: 999;
+}
+
+.cart-drawer-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: clamp(320px, 90vw, 420px);
+    background: var(--bg-elevated);
+    color: var(--text-primary);
+    box-shadow: -10px 0 40px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .4s cubic-bezier(.32, .72, 0, 1);
+    z-index: 1000;
+}
+
+.cart-drawer.is-open {
+    transform: translateX(0);
+}
+
+.cart-drawer-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+    border-bottom: 1px solid var(--border-color-soft);
+}
+
+.cart-drawer-header h2 {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    margin: 0;
+}
+
+.cart-drawer-count {
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    min-width: 1.4rem;
+    height: 1.4rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-drawer-close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 1.3rem;
+    line-height: 1;
+    padding: 0.25rem;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.cart-drawer-close:hover {
+    color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+.cart-drawer-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-drawer-body .product-summary:last-child {
+    margin-bottom: 0;
+}
+
+.cart-drawer-footer {
+    flex-shrink: 0;
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+    border-top: 1px solid var(--border-color-soft);
+}
+
+.cart-drawer-footer .total-amount {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+body.cart-drawer-locked {
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   Add-to-cart fly animation and button "added" state
+   ========================================================================== */
+
+.cart-fly-image {
+    position: fixed;
+    z-index: 1200;
+    border-radius: 8px;
+    object-fit: cover;
+    pointer-events: none;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .6s ease .1s;
+}
+
+.add-to-cart-btn.is-added {
+    background-color: #34c759 !important;
+    color: #fff !important;
+}
+

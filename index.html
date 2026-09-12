@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+            } catch (e) {}
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>maaz.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://kit.fontawesome.com">
+    <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap">
+    <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
     <!-- <script src="smooth-scroll.js" defer></script> -->
-    <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous" defer></script>
+    <script src="cart.js" defer></script>
 </head>
 <body>
     <div class = "hidden">
@@ -15,8 +30,20 @@
             <a href="index.html" class="logo">maaz.</a>
             <nav class="navbar">
             </nav>
-            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-        </header>  
+            <div class="header-actions">
+                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+                    <span class="theme-toggle-track">
+                        <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true"></i>
+                        <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true"></i>
+                        <span class="theme-toggle-thumb" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <a href="cart.html" class="cart-link" id="cart-icon-link" aria-label="Open cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count" hidden>0</span>
+                </a>
+            </div>
+        </header>
     </div>
     
     <main class="main-content">
@@ -38,7 +65,7 @@
         
         <div class = "hidden">
             <section class="featured-projects">
-                <h1>Featured Projects</h2>
+                <h1>Featured Projects</h1>
                     <div class="project">
                         <div class="project-tags">
                             <span class="tag">Custom Design</span>
@@ -47,7 +74,7 @@
                         <h3>Razor-88</h3>
                         <p>Retro-futuristic, 100% custom/fictional design, incorporating elements from cars such as the C4 Corvette, Callaway Sledgehammer, Testarossa, Quadra Turbo R and my own custom modifications.</p>
                         <div class="project-image">
-                            <img src="assets/Razor-88.png" alt="Retro-futuristic, 100% custom/fictional design, incorporating elements from cars such as the C4 Corvette, Callaway Sledgehammer, Testarossa, Quadra Turbo R and my own custom modifications.">
+                            <img src="assets/Razor-88.jpg" width="1370" height="771" alt="Retro-futuristic, 100% custom/fictional design, incorporating elements from cars such as the C4 Corvette, Callaway Sledgehammer, Testarossa, Quadra Turbo R and my own custom modifications.">
                         </div>
                     </div>
             </section>
@@ -60,7 +87,7 @@
                         </div>
                         <h3>Bugatti Chiron 300+ Super Sport</h3>
                         <div class="project-image">
-                            <img src="assets/bugatti1.png" alt="Bugatti Chiron 300+ Super Sport">
+                            <img src="assets/bugatti1.jpg" alt="Bugatti Chiron 300+ Super Sport">
                         </div>
                     </div>
             </section>
@@ -72,79 +99,79 @@
 <h1></h1>
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Razor-88 (2).png"></div>
-            <div class="artwork-item"><img src = "assets/Razor-88 (3).png"></div>
-            <div class="artwork-item"><img src = "assets/Razor-88 (4).png"></div>
+            <div class="artwork-item"><img src="assets/Razor-88 (2).jpg" width="1370" height="771" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Razor-88 (3).jpg" width="1370" height="771" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Razor-88 (4).jpg" width="1370" height="771" loading="lazy"></div>
         </div>
     </div>
 
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Tourbillon.png"></div>
-            <div class="artwork-item"><img src = "assets/Tourbillon (2).png"></div>
-            <div class="artwork-item"><img src = "assets/Tourbillon (4).png"></div>
+            <div class="artwork-item"><img src="assets/Tourbillon.jpg" width="1370" height="771" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Tourbillon (2).jpg" width="1370" height="771" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Tourbillon (4).jpg" width="1370" height="771" loading="lazy"></div>
         </div>
     </div>
 
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/bugatti1.png"></div>
-            <div class="artwork-item"><img src = "assets/bugatti2.png"></div>
-            <div class="artwork-item"><img src = "assets/image1.png"></div>
+            <div class="artwork-item"><img src="assets/bugatti1.jpg" width="1366" height="604" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/bugatti2.jpg" width="1295" height="674" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/image1.jpg" width="1457" height="718" loading="lazy"></div>
         </div>
     </div>
 
         <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Ramp Buggy.png"></div>
-            <div class="artwork-item"><img src = "assets/Ramp Buggy (2).png"></div>
-            <div class="artwork-item"><img src = "assets/Ramp Buggy (3).png"></div>
+            <div class="artwork-item"><img src="assets/Ramp Buggy.jpg" width="1331" height="749" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Ramp Buggy (2).jpg" width="1331" height="749" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Ramp Buggy (3).jpg" width="1331" height="749" loading="lazy"></div>
         </div>
     
     </div>
         <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Hammerhead.png"></div>
-            <div class="artwork-item"><img src = "assets/Hammerhead 2.png"></div>
-            <div class="artwork-item"><img src = "assets/Rocket Hammerhead GIF.gif"></div>
+            <div class="artwork-item"><img src="assets/Hammerhead.jpg" width="1426" height="802" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Hammerhead 2.jpg" width="1460" height="771" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Rocket Hammerhead GIF.gif" width="1314" height="740" loading="lazy"></div>
         </div>
     </div>
          <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Screenshot 2026-05-19 154751.png"></div>
-            <div class="artwork-item"><img src = "assets/Screenshot 2026-05-19 154810.png"></div>
-            <div class="artwork-item"><img src = "assets/Screenshot 2026-05-19 155137.png"></div>
+            <div class="artwork-item"><img src="assets/Screenshot 2026-05-19 154751.jpg" width="1512" height="900" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Screenshot 2026-05-19 154810.jpg" width="1401" height="847" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Screenshot 2026-05-19 155137.jpg" width="1307" height="827" loading="lazy"></div>
 
 
         </div>
     </div>
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/ducati.png"></div>
-            <div class="artwork-item"><img src = "assets/ducati 2.png"></div>
-            <div class="artwork-item"><img src = "assets/ducatis.png"></div>
+            <div class="artwork-item"><img src="assets/ducati.jpg" width="1920" height="1080" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/ducati 2.jpg" width="1920" height="1080" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/ducatis.jpg" width="1920" height="1080" loading="lazy"></div>
         </div>
     </div>
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/batmobile 3.png"></div>
-            <div class="artwork-item"><img src = "assets/house exterior.png"></div>
-            <div class="artwork-item"><img src = "assets/Interior 3.png"></div>
+            <div class="artwork-item"><img src="assets/batmobile 3.jpg" width="1920" height="1080" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/house exterior.jpg" width="1920" height="1080" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Interior 3.jpg" width="1920" height="1080" loading="lazy"></div>
         </div>
     </div>
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Interior 4.png"></div>
-            <div class="artwork-item"><img src = "assets/rear 2.png"></div>
-            <div class="artwork-item"><img src = "assets/Cybertruck Dunes rear.png"></div>
+            <div class="artwork-item"><img src="assets/Interior 4.jpg" width="1920" height="1080" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/rear 2.jpg" width="1920" height="1080" loading="lazy"></div>
+            <div class="artwork-item"><img src="assets/Cybertruck Dunes rear.jpg" width="1920" height="1080" loading="lazy"></div>
         </div>
     </div>
     <div class = "hidden">
         <div class = "artwork-display">
-            <div class="artwork-item"><img src = "assets/Bentley Casino.png"></div>
+            <div class="artwork-item"><img src="assets/Bentley Casino.jpg" width="1920" height="1080" loading="lazy"></div>
 
-            <!-- <img src = "assets/NSX.png"> -->
-            <div class="artwork-item"><img src = "assets/HEAT.png"></div>
+            <!-- <img src = "assets/NSX.jpg"> -->
+            <div class="artwork-item"><img src="assets/HEAT.jpg" width="1920" height="1080" loading="lazy"></div>
         </div>
     </div>
 

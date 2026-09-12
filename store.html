@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem('theme');
+                    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+                } catch (e) {}
+            })();
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>maaz.</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://kit.fontawesome.com">
+        <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap">
+        <link rel="stylesheet" href="shared.css">
         <link rel="stylesheet" href="store.css">
         <script src="app.js" defer></script>
-        <script src="cart.js"></script>
-        <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous"></script>
+        <script src="cart.js" defer></script>
+        <script src="https://kit.fontawesome.com/ceed7b02ce.js" crossorigin="anonymous" defer></script>
     </head>
 
 <body>
@@ -18,15 +32,27 @@
                 <a href="index.html">home</a>
                 <a href="store.html">store</a>
             </nav>
-            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
-        </header>  
+            <div class="header-actions">
+                <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
+                    <span class="theme-toggle-track">
+                        <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true"></i>
+                        <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true"></i>
+                        <span class="theme-toggle-thumb" aria-hidden="true"></span>
+                    </span>
+                </button>
+                <a href="cart.html" class="cart-link" id="cart-icon-link" aria-label="Open cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count" hidden>0</span>
+                </a>
+            </div>
+        </header>
     </div>
     <main class="store-content">
         <h2> store </h2>
         <div class="product-grid">
         <a href="cybertruckpack.html">
             <div class="product-card">
-                <img src="assets/Cybertruck Dunes rear.png" alt="Ducati Wallpaper Pack" >
+                <img src="assets/Cybertruck Dunes rear.jpg" width="1920" height="1080" alt="Ducati Wallpaper Pack">
                 <h1>Cybertruck Wallpaper Pack</h1>
                 <span class="original-price">$19.99</span>
                 <span class="discounted-price">$16.99</span>
@@ -34,7 +60,7 @@
         </a>
         <a href="cybertruckpack.html">
             <div class="product-card">
-                <img src="assets/Cybertruck Dunes rear.png" alt="Ducati Wallpaper Pack" >
+                <img src="assets/Cybertruck Dunes rear.jpg" width="1920" height="1080" loading="lazy" alt="Ducati Wallpaper Pack">
                 <h1>Cybertruck   Wallpaper Pack</h1>
                 <span class="original-price">$19.99</span>
                 <span class="discounted-price">$16.99</span>
@@ -42,7 +68,7 @@
         </a>
         <a href="cybertruckpack.html">
             <div class="product-card">
-                <img src="assets/Cybertruck Dunes rear.png" alt="Ducati Wallpaper Pack" >
+                <img src="assets/Cybertruck Dunes rear.jpg" width="1920" height="1080" loading="lazy" alt="Ducati Wallpaper Pack">
                 <h1>Cybertruck   Wallpaper Pack</h1>
                 <span class="original-price">$19.99</span>
                 <span class="discounted-price">$16.99</span>
@@ -53,7 +79,7 @@
     <div class="product-grid">
         <a href="ducatipack.html">
             <div class="product-card">
-                <img src="assets/ducati.png" alt="Ducati Wallpaper Pack" >
+                <img src="assets/ducati.jpg" width="1920" height="1080" loading="lazy" alt="Ducati Wallpaper Pack">
                 <h1>Stylized Ducati Panigale V4</h1>
                 <span class="original-price">$49.99</span>
                 <span class="discounted-price">$40.99</span>
@@ -61,7 +87,7 @@
         </a>
         <a href="ducatipack.html">
             <div class="product-card">
-                <img src="assets/ducati.png" alt="Ducati Wallpaper Pack" >
+                <img src="assets/ducati.jpg" width="1920" height="1080" loading="lazy" alt="Ducati Wallpaper Pack">
                 <h1>Stylized Ducati Panigale V4</h1>
                 <span class="original-price">$49.99</span>
                 <span class="discounted-price">$40.99</span>
@@ -69,7 +95,7 @@
         </a>
         <a href="ducatipack.html">
             <div class="product-card">
-                <img src="assets/ducati.png" alt="Ducati Wallpaper Pack" >
+                <img src="assets/ducati.jpg" width="1920" height="1080" loading="lazy" alt="Ducati Wallpaper Pack">
                 <h1>Stylized Ducati Panigale V4</h1>
                 <span class="original-price">$49.99</span>
                 <span class="discounted-price">$40.99</span>

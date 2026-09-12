@@ -1,4 +1,5 @@
-@import url('shared.css');
+/* shared.css is now loaded via its own <link> in <head>, before this file,
+   instead of @import — see the note at the top of shared.css. */
 
 /* Viewport fills screen; footer sits below the fold */
 body.checkout-page {
@@ -35,19 +36,21 @@ body.checkout-page .header {
 
 .payment-section,
 .cart-panel {
-    background: #171717;
+    background: var(--bg-page);
     padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 4vw, 2.5rem);
     overflow-y: auto;
+    transition: background-color .35s ease;
 }
 
 .order-summary {
-    background: #1c1c1c;
-    border-left: 1px solid #2a2a2a;
+    background: var(--bg-elevated);
+    border-left: 1px solid var(--border-color-soft);
     padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.25rem, 4vw, 2rem);
     display: flex;
     flex-direction: column;
     min-height: 0;
     overflow-y: auto;
+    transition: background-color .35s ease;
 }
 
 /* Cart page: left info panel + right summary */
@@ -57,20 +60,20 @@ body.checkout-page .header {
 
 .cart-panel h2 {
     font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    color: #fff;
+    color: var(--text-primary);
     margin: 0 0 0.5rem;
     line-height: 1.2;
 }
 
 .cart-subtext {
-    color: #909090;
+    color: var(--text-secondary);
     font-size: clamp(0.8rem, 1.5vw, 0.9rem);
     margin: 0 0 1rem;
 }
 
 .section-label {
     text-align: center;
-    color: #aaa;
+    color: var(--text-muted);
     font-size: clamp(0.75rem, 1.4vw, 0.85rem);
     margin: 0 0 0.6rem;
 }
@@ -83,7 +86,7 @@ body.checkout-page .header {
 }
 
 .section-link {
-    color: rgb(38, 113, 253);
+    color: var(--accent);
     font-size: clamp(0.75rem, 1.4vw, 0.85rem);
     text-decoration: none;
 }
@@ -93,7 +96,7 @@ body.checkout-page .header {
 }
 
 .section-subtext {
-    color: #909090;
+    color: var(--text-secondary);
     font-size: clamp(0.7rem, 1.3vw, 0.8rem);
     margin: 0.2rem 0 0.6rem;
 }
@@ -130,7 +133,7 @@ body.checkout-page .header {
     align-items: center;
     gap: 0.75rem;
     margin: 0.75rem 0;
-    color: #666;
+    color: var(--text-faint);
     font-size: clamp(0.7rem, 1.2vw, 0.8rem);
 }
 
@@ -139,7 +142,7 @@ body.checkout-page .header {
     content: '';
     flex: 1;
     height: 1px;
-    background: #333;
+    background: var(--border-color);
 }
 
 .contact-info,
@@ -150,7 +153,7 @@ body.checkout-page .header {
 label {
     font-size: clamp(0.8rem, 1.5vw, 0.9rem);
     font-weight: 600;
-    color: #fff;
+    color: var(--text-primary);
     display: block;
 }
 
@@ -160,25 +163,25 @@ label {
     padding: 0.55rem 0.65rem;
     margin-top: 0.35rem;
     border-radius: 6px;
-    border: 1px solid #333;
-    background-color: #2c2c2c;
-    color: #fff;
+    border: 1px solid var(--border-color);
+    background-color: var(--input-bg);
+    color: var(--text-primary);
     font-size: clamp(0.75rem, 1.4vw, 0.85rem);
     font-family: 'Poppins', sans-serif;
 }
 
 .card-fields {
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
-    background: #2c2c2c;
+    background: var(--input-bg);
 }
 
 .card-fields input {
     margin: 0;
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
     background: transparent;
 }
 
@@ -192,182 +195,12 @@ label {
 }
 
 .card-row input:first-child {
-    border-right: 1px solid #333;
+    border-right: 1px solid var(--border-color);
 }
 
-.product-summary-container {
-    flex: 1;
-    min-height: 0;
-}
-
-.product-summary {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: start;
-    gap: 0.85rem;
-    margin-bottom: 0.85rem;
-}
-
-.product-thumb {
-    position: relative;
-    flex-shrink: 0;
-}
-
-.product-thumb img {
-    width: clamp(80px, 12vw, 120px);
-    height: clamp(80px, 12vw, 120px);
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #333;
-    display: block;
-}
-
-.quantity-badge {
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    background: #333;
-    color: #fff;
-    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
-    font-weight: 600;
-    min-width: 1.25rem;
-    height: 1.25rem;
-    padding: 0 0.3rem;
-    border-radius: 999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #1c1c1c;
-}
-
-.product-info {
-    min-width: 0;
-}
-
-.product-info h1 {
-    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-    font-weight: 500;
-    color: #fff;
-    margin: 0 0 0.4rem;
-    line-height: 1.3;
-}
-
-.product-summary .line-price {
-    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
-    color: #fff;
-    font-weight: 500;
-    margin: 0;
-    white-space: nowrap;
-}
-
-.product-details i {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: rgb(38, 113, 253);
-    cursor: pointer;
-}
-
-.product-details i:active {
-    color: rgb(54, 53, 53);
-}
-
-.quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.quantity-controls button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: 0.2s;
-}
-
-.quantity-controls .quantity {
-    font-size: clamp(0.75rem, 1.4vw, 0.85rem);
-    color: #ccc;
-    min-width: 1rem;
-    text-align: center;
-}
-
-.total-amount {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: clamp(0.9rem, 1.6vw, 1rem);
-    font-weight: 600;
-    color: #fff;
-    flex-shrink: 0;
-    border-top: 1px solid #333;
-    padding-top: 0.75rem;
-    margin-top: 0.75rem;
-}
-
-.total-amount .price {
-    font-size: clamp(1rem, 1.8vw, 1.15rem);
-    color: #fff;
-    font-weight: 600;
-}
-
-#checkout-btn-container {
-    margin-top: 0.75rem;
-    flex-shrink: 0;
-}
-
-.checkout-btn {
-    width: 100%;
-    padding: 0.7rem;
-    background-color: rgb(38, 113, 253);
-    border: none;
-    border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #000;
-    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.checkout-btn:hover {
-    background-color: #fff;
-}
-
-.greyed-checkout-btn {
-    width: 100%;
-    padding: 0.7rem;
-    background-color: #444;
-    border: none;
-    border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    color: #888;
-    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-    cursor: default;
-}
-
-.greyed-checkout-btn:active {
-    background-color: rgb(205, 52, 52);
-    color: #000;
-    cursor: pointer;
-}
-
-.empty-cart-message {
-    font-size: clamp(0.75rem, 1.4vw, 0.85rem);
-    margin-top: 0.5rem;
-    text-align: center;
-    color: #909090;
-}
-
-.store-link {
-    color: rgb(38, 113, 253);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.store-link:hover {
-    text-decoration: underline;
-}
+/* Cart item rows, checkout button, and empty state now live in shared.css -
+   they're used here, on the cart page, and inside the cart drawer that
+   appears on every page, so they need to work without checkout.css loaded. */
 
 @media (max-width: 768px) {
     .checkout-layout,
@@ -378,7 +211,7 @@ label {
 
     .order-summary {
         border-left: none;
-        border-top: 1px solid #2a2a2a;
+        border-top: 1px solid var(--border-color-soft);
     }
 
     .express-checkout {

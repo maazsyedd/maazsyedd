@@ -1,4 +1,5 @@
-@import url('shared.css');
+/* shared.css is now loaded via its own <link> in <head>, before this file,
+   instead of @import — see the note at the top of shared.css. */
 
 .product-page {
     display: flex;
@@ -22,7 +23,7 @@
     max-width: 100%;
     height: auto;
     border-radius: clamp(1rem, 2.5vw, 1.5rem);
-    box-shadow: 0px 10px 75px #000000;
+    box-shadow: 0px 10px 75px var(--shadow-color);
     display: block;
     margin: 0;
 }
@@ -31,11 +32,13 @@
     display: flex;
     flex: 1 1 min(100%, 320px);
     max-width: 376px;
-    background: #000000;
+    background: var(--bg-panel);
     border-radius: clamp(0.6rem, 1.5vw, 0.75rem);
     overflow: hidden;
     padding: clamp(0.6rem, 1.5vw, 0.75rem);
-    box-shadow: 0px 10px 50px #000000;
+    box-shadow: 0px 10px 50px var(--shadow-color);
+    border: 1px solid var(--border-color-soft);
+    transition: background-color .35s ease;
 }
 
 .product-details {
@@ -45,7 +48,7 @@
 
 .product-details .category {
     font-size: clamp(0.75rem, 1.6vw, 0.8rem);
-    color: #aaa;
+    color: var(--text-muted);
 }
 
 .product-details h2 {
@@ -62,14 +65,14 @@
 
 .product-details .price .original-price {
     text-decoration: line-through;
-    color: #aaa;
+    color: var(--text-muted);
     margin-right: 10px;
     font-size: clamp(0.85rem, 1.8vw, 0.95rem);
 }
 
 .product-details .price .discounted-price {
     font-size: clamp(1rem, 2.2vw, 1.25rem);
-    color: rgb(38, 113, 253);
+    color: var(--accent);
 }
 
 .product-details p {
@@ -80,7 +83,7 @@
 
 .product-details button {
     padding: clamp(0.6rem, 1.5vw, 0.75rem) clamp(1rem, 2.5vw, 1.25rem);
-    background-color: rgb(38, 113, 253);
+    background-color: var(--accent);
     border: none;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif;
@@ -93,8 +96,9 @@
 }
 
 .product-details button:hover {
-    background-color: rgb(255, 255, 255);
-    box-shadow: 0px 0px 20px #696868;
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+    box-shadow: 0px 0px 20px var(--glow-color);
     transform: scale(1.03);
 }
 
