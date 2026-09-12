@@ -328,8 +328,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showAddedState(button);
         flyToCart(document.querySelector('.product-image img'), document.getElementById('cart-icon-link'));
 
+        // Keep the checkmark + fly-to-cart animation, but don't yank the
+        // user into the drawer - it only opens when they actually click the
+        // cart icon.
         refreshCart();
-        openCartDrawer();
     }
 
     // ------------------------------------------------------------------
