@@ -16,14 +16,18 @@
 }
 
 .hero {
+    /* Sized ~20% smaller across the board (gap, bottom margin, text, and
+       the store card below) so "Featured Projects" peeks into view at the
+       bottom of the initial viewport as a hint to scroll, instead of the
+       hero filling the whole screen on its own. */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(1.5rem, 3vw, 3rem);
+    gap: clamp(1.2rem, 2.4vw, 2.4rem);
     width: 100%;
     max-width: 860px;
-    margin: 0 auto clamp(3.2rem, 9.6vw, 8rem);
+    margin: 0 auto clamp(2.56rem, 7.68vw, 6.4rem);
 }
 
 .intro {
@@ -34,21 +38,21 @@
 
 .intro h1 {
     color: var(--text-primary);
-    font-size: clamp(2rem, 5vw, 4.8rem);
-    margin-bottom: clamp(-1.6rem, -2vw, -0.6rem);
+    font-size: clamp(1.6rem, 4vw, 3.84rem);
+    margin-bottom: clamp(-1.28rem, -1.6vw, -0.48rem);
     line-height: 1.05;
 }
 
 .intro h2 {
     color: var(--text-secondary);
-    font-size: clamp(2rem, 5vw, 4.8rem);
+    font-size: clamp(1.6rem, 4vw, 3.84rem);
     line-height: 1.05;
 }
 
 .store-card {
     position: relative;
     flex: 0 0 auto;
-    width: min(100%, 300px);
+    width: min(100%, 240px);
     aspect-ratio: 8 / 11;
 }
 

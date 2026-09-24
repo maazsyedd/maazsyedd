@@ -53,6 +53,11 @@ foreach ($pattern in $sourceExtensions) {
         $g.Dispose()
         $img.Dispose()
 
+        # Capture dimensions before disposing - Width/Height throw once the
+        # bitmap is disposed, which was leaving these columns blank below.
+        $width = $bmp.Width
+        $height = $bmp.Height
+
         $bmp.Save($dst, $jpegCodec, $encParams)
         $bmp.Dispose()
 
@@ -63,8 +68,8 @@ foreach ($pattern in $sourceExtensions) {
             Name   = $_.Name
             OldKB  = [math]::Round($oldSize / 1KB)
             NewKB  = [math]::Round($newSize / 1KB)
-            Width  = $bmp.Width
-            Height = $bmp.Height
+            Width  = $width
+            Height = $height
         }
     }
 }
