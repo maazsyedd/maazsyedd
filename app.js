@@ -29,6 +29,87 @@ document.querySelectorAll('.hidden').forEach((element) => {
     observer.observe(element);
 });
 
+// Hide the sticky navbar after 2 seconds of continuous downward scrolling,
+// or after 3 seconds of no activity at all, and bring it back the moment
+// the user scrolls up (or returns to the top). A pause in scrolling resets
+// the 2-second countdown.
+(function () {
+    const header = document.querySelector('.header');
+    const bar = header && header.parentElement;
+    if (!bar) return;
+
+    const HIDE_AFTER_MS = 2000;
+    const IDLE_RESET_MS = 1500;
+    const INACTIVE_HIDE_MS = 3000;
+
+    let lastY = window.scrollY;
+    let idleTimer = null;
+    let hideTimer = null;
+    let inactiveTimer = null;
+
+    // Stays up at the very top of the page, and while the user is pointing
+    // at or tabbed into the bar.
+    function hideIfIdle() {
+        if (window.scrollY <= header.offsetHeight) return;
+        if (header.matches(':hover') || header.contains(document.activeElement)) return;
+        bar.classList.add('nav-hidden');
+    }
+
+    function restartInactivityTimer() {
+        clearTimeout(inactiveTimer);
+        inactiveTimer = setTimeout(hideIfIdle, INACTIVE_HIDE_MS);
+    }
+
+    ['scroll', 'mousemove', 'keydown', 'pointerdown', 'touchstart'].forEach((type) => {
+        window.addEventListener(type, restartInactivityTimer, { passive: true });
+    });
+    restartInactivityTimer();
+
+    // Lets the CSS slide the bar up by exactly its own height, leaving the
+    // watermark underneath it in view.
+    function measure() {
+        bar.style.setProperty('--nav-shift', header.offsetHeight + 'px');
+    }
+    measure();
+    window.addEventListener('resize', measure);
+
+    function show() {
+        bar.classList.remove('nav-hidden');
+    }
+
+    function resetCountdown() {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+    }
+
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+
+        if (y < lastY || y <= header.offsetHeight) {
+            resetCountdown();
+            show();
+        } else if (y > lastY && hideTimer === null) {
+            hideTimer = setTimeout(() => bar.classList.add('nav-hidden'), HIDE_AFTER_MS);
+        }
+
+        lastY = y;
+
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(resetCountdown, IDLE_RESET_MS);
+    }, { passive: true });
+})();
+
+// Light deterrent against saving artwork: blocks the right-click menu and
+// drag-to-desktop on images. Delegated on document so images added later
+// (e.g. the cart drawer) are covered too.
+['contextmenu', 'dragstart'].forEach((type) => {
+    document.addEventListener(type, (event) => {
+        if (event.target instanceof HTMLImageElement) {
+            event.preventDefault();
+        }
+    });
+});
+
 const yearElement = document.getElementById('year');
 if (yearElement) {
     yearElement.textContent = new Date().getFullYear();

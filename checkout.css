@@ -1,9 +1,10 @@
 /* shared.css is now loaded via its own <link> in <head>, before this file,
    instead of @import — see the note at the top of shared.css. */
 
-/* Viewport fills screen; footer sits below the fold */
+/* Viewport fills screen, with no gap under the navbar. */
 body.checkout-page {
     min-height: 100dvh;
+    --header-gap: 0px;
 }
 
 .checkout-viewport {
@@ -13,15 +14,9 @@ body.checkout-page {
     width: 100%;
 }
 
-body.checkout-page > footer {
-    margin-top: 0;
-}
-
 body.checkout-page .header {
-    width: min(calc(100% - 2 * var(--content-gutter)), var(--content-max));
-    margin-top: clamp(0.5rem, 1.5vw, 0.75rem);
-    margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem);
-    padding: clamp(0.6rem, 1.5vw, 0.85rem) clamp(1rem, 3vw, 1.5rem);
+    padding-top: clamp(0.6rem, 1.5vw, 0.85rem);
+    padding-bottom: clamp(0.6rem, 1.5vw, 0.85rem);
 }
 
 /* Shopify-style split layout */

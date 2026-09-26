@@ -150,13 +150,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const greyedOutButton = document.createElement('div');
                 greyedOutButton.innerHTML = `
                     <a><button class="greyed-checkout-btn">Checkout</button></a>
-                    <p class="empty-cart-message">
-                        Your cart is empty, go to
-                        <a class="store-link" href="store.html">Store</a> to add items!
-                    </p>
                 `;
                 container.appendChild(greyedOutButton);
             }
+
+            // Shown whether or not the cart is empty, since the navbar no
+            // longer links to the store.
+            const storeMessage = document.createElement('p');
+            storeMessage.classList.add('empty-cart-message');
+            storeMessage.innerHTML = `
+                go to <a class="store-link" href="store.html">Store</a> to add items!
+            `;
+            container.appendChild(storeMessage);
         });
     }
 

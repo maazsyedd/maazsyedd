@@ -30,6 +30,8 @@
         <header class="header">
             <a href="index.html" class="logo">maaz.</a>
             <nav class="navbar">
+                <a href="index.html#featured-projects">Projects</a>
+                <a href="index.html#gallery">Gallery</a>
             </nav>
             <div class="header-actions">
                 <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="true">
@@ -47,6 +49,7 @@
                     <span class="cart-count" id="cart-count" hidden>0</span>
                 </a>
             </div>
+            <p class="watermark">Created and designed by Maaz Syed, <span id="year"></span></p>
         </header>
     </div>
     
@@ -54,8 +57,10 @@
         <div class="hero">
             <section class="intro">
                 <h1>Maaz Syed</h1>
-                <h2>3D Artist</h2>
+                <h2>Computer Engineering student @ TMU &amp; 3D Artist</h2>
             </section>
+            <!-- Store card hidden while the store is non-functional. To bring it back,
+                 uncomment this block and revert the .hero / .intro centering in style.css.
             <div class="store-card">
                 <div class="box-shadow"></div>
                 <a href="store.html">
@@ -64,20 +69,21 @@
                     </div>
                 </a>
             </div>
+            -->
         </div>
         
         <div>
-            <section class="featured-projects">
+            <section class="featured-projects" id="featured-projects">
                 <h1>Featured Projects</h1>
                     <div class="project">
                         <div class="project-tags">
                             <span class="tag">Custom Design</span>
                             <span class="tag">Competition</span>
                         </div>
-                        <h3>AFM-42 Hammerhead</h3>
-                        <p>Original fictional design and 3D Model submitted to Badimo's seasonal Jailbreak design competition — top-voted vehicle of the 2024–2025 cycle and selected by the developers to ship into the live game. Returned 18 months later with an upgraded variant.</p>
+                        <h3><a class="project-link" href="https://www.reddit.com/r/JailbreakCreations/comments/198j1g2/s20_grand_prize_behold" target="_blank" rel="noopener">AFM-42 &ldquo;Hammerhead&rdquo;</a></h3>
+                        <p>Original fictional design and 3D Model submitted to Badimo's seasonal design competition — <a class="project-link" href="https://www.reddit.com/r/JailbreakCreations/comments/198j1g2/s20_grand_prize_behold" target="_blank" rel="noopener">top-voted vehicle of the 2024–2025 cycle with 1.6k likes on social media</a> and selected by the developers to ship into the live game. Returned 18 months later with an upgraded variant.</p>
                         <div class="project-image">
-                            <img src="assets/Hammerhead 2.jpg" width="1460" height="771" alt="Original fictional design and 3D Model submitted to Badimo's seasonal Jailbreak design competition — top-voted vehicle of the 2024–2025 cycle and selected by the developers to ship into the live game. Returned 18 months later with an upgraded variant.">
+                            <img src="assets/Hammerhead 2.jpg" width="1460" height="771" alt="Original fictional design and 3D Model submitted to Badimo's seasonal Jailbreak design competition — top-voted vehicle of the 2024–2025 cycle with 1.6k likes and selected by the developers to ship into the live game. Returned 18 months later with an upgraded variant.">
                         </div>
                     </div>
             </section>
@@ -88,11 +94,16 @@
 <!-- artwork section -->
 
 <h1></h1>
-    <div class = "hidden">
+    <div class = "hidden" id="gallery">
         <div class = "artwork-display">
             <div class="artwork-item"><img src="assets/Hammerhead 4.jpg" width="1639" height="802" loading="lazy"></div>
             <div class="artwork-item"><img src="assets/Hammerhead 3.jpg" width="1123" height="623" loading="lazy"></div>
-            <div class="artwork-item"><img src="assets/Rocket Hammerhead GIF.gif" width="1314" height="740" loading="lazy"></div>
+            <div class="artwork-item">
+                <video autoplay muted loop playsinline width="1314" height="740" poster="assets/Rocket Hammerhead poster.jpg" aria-label="AFM-42 Hammerhead firing its rocket booster">
+                    <source src="assets/Rocket Hammerhead.webm" type="video/webm">
+                    <source src="assets/Rocket Hammerhead.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>
 
@@ -167,21 +178,6 @@
         </div>
     </div>
 
-    <footer>
-        <div class="hidden">
-           <div class="footer-content">
-                <div class="social-media-icons">
-                    <i class="fab fa-instagram"></i>
-                    <i class="fa-brands fa-x-twitter"></i>
-                    <i class="fa-brands fa-discord"></i>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; <span id="year"></span> Maaz Syed. All Rights Reserved.</p>
-                    <p style="color:grey";>site overhaul coming soon. coded by me</p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
 
 </body>

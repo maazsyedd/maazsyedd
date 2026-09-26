@@ -20,10 +20,13 @@
        the store card below) so "Featured Projects" peeks into view at the
        bottom of the initial viewport as a hint to scroll, instead of the
        hero filling the whole screen on its own. */
+    /* Store card is currently commented out in index.html, so the hero is
+       centered with the name front and center. When the card returns, swap
+       justify-content back to space-between and .intro text-align to left. */
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: clamp(1.2rem, 2.4vw, 2.4rem);
     width: 100%;
     max-width: 860px;
@@ -31,22 +34,25 @@
 }
 
 .intro {
-    text-align: left;
+    text-align: center;
     flex: 0 1 auto;
     margin-bottom: 0;
 }
 
 .intro h1 {
     color: var(--text-primary);
-    font-size: clamp(1.6rem, 4vw, 3.84rem);
-    margin-bottom: clamp(-1.28rem, -1.6vw, -0.48rem);
+    font-size: clamp(2.4rem, 7vw, 5.6rem);
+    margin-bottom: clamp(0.4rem, 1vw, 0.8rem);
     line-height: 1.05;
 }
 
 .intro h2 {
     color: var(--text-secondary);
-    font-size: clamp(1.6rem, 4vw, 3.84rem);
-    line-height: 1.05;
+    /* Kept on a single line; font scales with viewport so it fits on phones. */
+    font-size: clamp(0.7rem, 2.2vw, 1.6rem);
+    line-height: 1.3;
+    white-space: nowrap;
+    margin: 0 auto;
 }
 
 .store-card {
@@ -183,6 +189,25 @@
     line-height: 1.5;
 }
 
+/* Links out to the Reddit post; underlined so they read as links without
+   changing the card's colors. */
+.project a.project-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--text-faint);
+    text-underline-offset: 3px;
+    transition: text-decoration-color .2s ease, color .2s ease;
+}
+
+.project p a.project-link {
+    font-weight: 600;
+}
+
+.project a.project-link:hover {
+    color: var(--text-primary);
+    text-decoration-color: currentColor;
+}
+
 .project-image {
     background-color: var(--bg-surface);
     border-radius: 14px;
@@ -223,7 +248,8 @@ section {
     min-width: 0;
 }
 
-.artwork-display img {
+.artwork-display img,
+.artwork-display video {
     border-radius: clamp(0.8rem, 2.4vw, 1.2rem);
     width: 100%;
     max-width: 100%;
@@ -238,8 +264,9 @@ section {
     z-index: 2;
 }
 
-.artwork-item:hover img {
-    transform: scale(1.03);
+.artwork-item:hover img,
+.artwork-item:hover video {
+    transform: scale(1.15);
     box-shadow: 0px 0px 20px var(--glow-color);
 }
 

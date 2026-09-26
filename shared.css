@@ -22,6 +22,8 @@ html {
     --content-max: 1000px;
     --content-gutter: clamp(2rem, 8vw, 5rem);
     --product-image-scale: 75%;
+    --header-gap: clamp(2rem, 5vw, 3.5rem);
+    --header-inset: clamp(1.25rem, 3vw, 2.25rem);
 
     /* Dark theme (default) */
     --bg-page: #171717;
@@ -29,7 +31,6 @@ html {
     --bg-surface: #2c2c2c;
     --bg-panel: #000000;
     --bg-header: #171717;
-    --bg-footer: #000000;
     --input-bg: #2c2c2c;
 
     --text-primary: #ffffff;
@@ -64,7 +65,6 @@ html {
     --bg-surface: #f0f0f2;
     --bg-panel: #ffffff;
     --bg-header: #ffffff;
-    --bg-footer: #f0f0f2;
     --input-bg: #ffffff;
 
     --text-primary: #1d1d1f;
@@ -145,6 +145,10 @@ h2 {
     opacity: 1;
 }
 
+/* ARCHIVED: original floating pill navbar. To restore, uncomment this block,
+   delete the "Top-mounted navbar" block below, and remove the sticky
+   wrapper rule (body > .hidden:has(> .header)).
+
 .header {
     position: relative;
     width: min(calc(100% - 2 * var(--content-gutter)), var(--content-max));
@@ -158,14 +162,6 @@ h2 {
     align-items: center;
     box-shadow: 0px 10px 50px var(--shadow-color);
     transition: background-color .35s ease, box-shadow .35s ease;
-}
-
-.logo {
-    font-size: clamp(1.2rem, 2.4vw, 1.5rem);
-    color: var(--logo-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color .35s ease, transform .1s ease-out;
 }
 
 .navbar {
@@ -186,6 +182,87 @@ h2 {
 
 .navbar a:hover {
     text-decoration: underline;
+}
+*/
+
+/* Top-mounted navbar: full-width bar pinned to the top of the viewport,
+   logo on the left, links + actions on the right. The header's .hidden
+   wrapper is what actually sticks (a sticky element can only stick within
+   its parent, and the wrapper is only as tall as the header). The wrapper's
+   filter/transform are dropped so the header's backdrop blur can see the
+   page behind it; it still fades in via opacity. */
+body > .hidden:has(> .header) {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    filter: none;
+    transform: none;
+    transition: opacity .5s ease-out, transform .3s ease;
+}
+
+/* Toggled by app.js: slides the bar up out of view after a couple of
+   seconds of scrolling down, and back in on any scroll up. It shifts by
+   exactly the bar's height (--nav-shift, set by app.js) so the watermark
+   hanging below it slides up into the bar's place instead of leaving too. */
+body > .hidden:has(> .header).nav-hidden {
+    transform: translateY(calc(-1 * var(--nav-shift, 100%)));
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    margin: 0 0 var(--header-gap);
+    padding: clamp(0.55rem, 1.3vw, 0.8rem) var(--header-inset);
+    background: color-mix(in srgb, var(--bg-header) 82%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-color-soft);
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    transition: background-color .35s ease, border-color .35s ease;
+}
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.navbar:empty {
+    display: none;
+}
+
+.navbar a {
+    font-size: clamp(0.875rem, 1.6vw, 1.05rem);
+    line-height: 1;
+    font-weight: 500;
+    color: var(--nav-link-color);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.navbar a:hover {
+    color: var(--text-primary);
+    transform: none;
+}
+
+/* Keeps in-page anchor targets from landing underneath the sticky bar. */
+[id] {
+    scroll-margin-top: clamp(3.5rem, 7vw, 4.5rem);
+}
+
+.logo {
+    font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+    line-height: 1;
+    color: var(--logo-color);
+    text-decoration: none;
+    font-weight: 600;
+    /* Pushes the nav links and actions to the right edge. */
+    margin-right: auto;
+    transition: color .35s ease, transform .1s ease-out;
 }
 
 .header-actions {
@@ -217,73 +294,20 @@ header a:active {
     font-family: 'Poppins', sans-serif;
 }
 
-footer {
-    margin-top: clamp(2rem, 6vw, 6rem);
-    color: var(--text-primary);
-    background-color: var(--bg-footer);
-    width: 100%;
-    padding: clamp(0.85rem, 2vw, 1.1rem) 0;
-    font-family: "Poppins", sans-serif;
-    transition: background-color .35s ease, color .35s ease;
-}
-
-.footer-content {
-    color: var(--text-primary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: min(calc(100% - 2 * var(--content-gutter)), var(--content-max));
-    margin: 0 auto;
-    padding: 0 clamp(1rem, 4vw, 2rem);
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.footer-links a {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-size: clamp(0.8rem, 2vw, 0.875rem);
-}
-
-.footer-links a:hover {
-    text-decoration: underline;
-}
-
-.social-media-icons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: clamp(0.75rem, 2.5vw, 1.25rem);
-    margin: clamp(0.5rem, 1.5vw, 0.75rem) 0;
-}
-
-.social-media-icons i {
-    color: var(--text-primary);
-    font-size: clamp(1.25rem, 3vw, 1.5625rem);
-    transform: translateY(20%);
-    transition: .3s ease all;
-}
-
-.social-media-icons i:hover {
-    color: var(--text-secondary);
-    transform: translateY(0%);
-    transition: .3s ease all;
-}
-
-.footer-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    color: var(--text-primary);
-    font-size: clamp(0.85rem, 2vw, 0.9375rem);
+/* Credit line hanging just under the navbar, lined up with the logo. It
+   lives inside .header (positioned out of the flex row), so it sticks and
+   slides with the bar. */
+.watermark {
+    position: absolute;
+    top: 100%;
+    left: var(--header-inset);
+    margin: 0.4rem 0 0;
+    font-size: clamp(0.62rem, 1.1vw, 0.72rem);
+    color: var(--text-faint);
+    opacity: 0.6;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
 }
 
 /* Light/dark mode toggle — Apple-inspired oval switch */
@@ -394,11 +418,13 @@ footer {
     outline-offset: 2px;
 }
 
+/* ARCHIVED with the floating pill navbar:
 @media (max-width: 768px) {
     .navbar a {
         padding: 0 clamp(0.5rem, 3vw, 1.5rem);
     }
 }
+*/
 
 /* ==========================================================================
    Cart item rows, checkout button, and empty state.
@@ -664,12 +690,17 @@ footer {
     display: flex;
     flex-direction: column;
     transform: translateX(100%);
-    transition: transform .4s cubic-bezier(.32, .72, 0, 1);
+    /* Hidden once the slide-out finishes, so its shadow doesn't bleed back
+       into the right edge of the page while the drawer is closed. */
+    visibility: hidden;
+    transition: transform .4s cubic-bezier(.32, .72, 0, 1), visibility 0s linear .4s;
     z-index: 1000;
 }
 
 .cart-drawer.is-open {
     transform: translateX(0);
+    visibility: visible;
+    transition: transform .4s cubic-bezier(.32, .72, 0, 1), visibility 0s;
 }
 
 .cart-drawer-header {
