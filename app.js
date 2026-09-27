@@ -100,11 +100,11 @@ document.querySelectorAll('.hidden').forEach((element) => {
 })();
 
 // Light deterrent against saving artwork: blocks the right-click menu and
-// drag-to-desktop on images. Delegated on document so images added later
+// drag-to-desktop on images and videos. Delegated on document so images added later
 // (e.g. the cart drawer) are covered too.
 ['contextmenu', 'dragstart'].forEach((type) => {
     document.addEventListener(type, (event) => {
-        if (event.target instanceof HTMLImageElement) {
+        if (event.target instanceof HTMLImageElement || event.target instanceof HTMLVideoElement) {
             event.preventDefault();
         }
     });
