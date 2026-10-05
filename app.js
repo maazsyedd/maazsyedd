@@ -110,6 +110,20 @@ document.querySelectorAll('.hidden').forEach((element) => {
     });
 });
 
+// Gallery images grow a further 40% after being hovered for 1 second. A
+// class (not a CSS animation) so the existing transform transition handles
+// both growing and shrinking back smoothly.
+document.querySelectorAll('.artwork-item').forEach((item) => {
+    let zoomTimer = null;
+    item.addEventListener('mouseenter', () => {
+        zoomTimer = setTimeout(() => item.classList.add('zoomed'), 1000);
+    });
+    item.addEventListener('mouseleave', () => {
+        clearTimeout(zoomTimer);
+        item.classList.remove('zoomed');
+    });
+});
+
 const yearElement = document.getElementById('year');
 if (yearElement) {
     yearElement.textContent = new Date().getFullYear();

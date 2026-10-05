@@ -55,6 +55,55 @@
     margin: 0 auto;
 }
 
+/* Software logo standing in for its name in the hero line; the name shows
+   in a small label above it on hover / keyboard focus. */
+.tool-icon {
+    position: relative;
+    display: inline-block;
+    width: 0.95em;
+    height: 0.95em;
+    vertical-align: -0.12em;
+    color: #e87d0d;
+    outline: none;
+}
+
+.tool-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    transition: transform .2s ease;
+}
+
+.tool-icon::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translate(-50%, 4px);
+    padding: 0.25rem 0.55rem;
+    border-radius: 5px;
+    background-color: #e87d0d;
+    color: #ffffff;
+    font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+    line-height: 1.2;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.tool-icon:hover svg,
+.tool-icon:focus-visible svg {
+    transform: scale(1.12);
+}
+
+.tool-icon:hover::after,
+.tool-icon:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
 .store-card {
     position: relative;
     flex: 0 0 auto;
@@ -191,7 +240,8 @@
 
 /* Links out to the Reddit post; underlined so they read as links without
    changing the card's colors. */
-.project a.project-link {
+.project a.project-link,
+.artwork-caption a.project-link {
     color: inherit;
     text-decoration: underline;
     text-decoration-color: var(--text-faint);
@@ -199,11 +249,13 @@
     transition: text-decoration-color .2s ease, color .2s ease;
 }
 
-.project p a.project-link {
+.project p a.project-link,
+.artwork-caption p a.project-link {
     font-weight: 600;
 }
 
-.project a.project-link:hover {
+.project a.project-link:hover,
+.artwork-caption a.project-link:hover {
     color: var(--text-primary);
     text-decoration-color: currentColor;
 }
@@ -231,6 +283,93 @@
 section {
     display: grid;
     text-align: center;
+}
+
+/* body > .hidden is a horizontal flex row (shared.css); gallery rows with a
+   caption need to stack it above the images instead of beside them. */
+body > .hidden:has(> .artwork-caption) {
+    flex-direction: column;
+    align-items: center;
+}
+
+/* "Client Commissions" / "Passion Projects" section titles — same look as
+   the "Featured Projects" heading. */
+.gallery-heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+    color: var(--text-heading-soft);
+    text-align: center;
+    margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+}
+
+/* Small header + description above each gallery row. Shares the row's width
+   so the text lines up with the left edge of the first image. */
+.artwork-caption {
+    width: min(calc(100% - 2 * var(--content-gutter)), var(--content-max));
+    margin: clamp(0.5rem, 1.5vw, 1rem) auto clamp(0.75rem, 1.6vw, 1rem);
+    text-align: left;
+}
+
+.artwork-caption h3 {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+/* Heading with Featured Projects-style tags beside it; wraps under on
+   narrow screens. */
+.caption-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 10px;
+    /* Takes over the h3's default top margin (1em of its font size) so the
+       caption starts at the same height as the others. */
+    margin: clamp(1rem, 2.2vw, 1.2rem) 0 0.3rem;
+}
+
+/* Default margins on the h3 pushed it below the tags' centre line. */
+.caption-title h3 {
+    margin: 0;
+}
+
+/* Inline spans' padding doesn't count toward line height, which left the
+   pills sitting above the heading's centre; as flex items they center on
+   their full box. */
+.caption-title .project-tags {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 0;
+}
+
+.caption-title .tag {
+    margin-right: 0;
+    padding: 0.25rem 0.64rem;
+    font-size: clamp(0.715rem, 1.51vw, 0.81rem);
+    line-height: 1.2;
+}
+
+.artwork-caption p {
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Role / date lines under the heading, before the description. */
+.artwork-caption .caption-role {
+    color: var(--text-primary);
+    font-size: clamp(0.85rem, 1.9vw, 0.95rem);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.artwork-caption .caption-date {
+    line-height: 1.4;
+    margin: 0;
+}
+
+.artwork-caption .caption-date + p {
+    margin-top: 0.5rem;
 }
 
 .artwork-display {
@@ -268,6 +407,114 @@ section {
 .artwork-item:hover video {
     transform: scale(1.15);
     box-shadow: 0px 0px 20px var(--glow-color);
+}
+
+/* Added by app.js after 1s of hovering: another 40% on top of the 1.15. */
+.artwork-item.zoomed img,
+.artwork-item.zoomed video {
+    transform: scale(1.61);
+}
+
+/* Gallery row with four images instead of three; 2x2 on phones. */
+.artwork-display.artwork-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+    .artwork-display.artwork-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Tiles here start ~3/4 the width of a 3-column tile, so both hover steps
+   are scaled by 4/3 to land at the same on-screen size as the rest of the
+   gallery (1.15 -> 1.53, 1.61 -> 2.15). Desktop only: on phones the 2x2
+   tiles are already larger than 3-column ones. */
+@media (min-width: 769px) {
+    .artwork-cols-4 .artwork-item:hover img,
+    .artwork-cols-4 .artwork-item:hover video {
+        transform: scale(1.53);
+    }
+
+    .artwork-cols-4 .artwork-item.zoomed img,
+    .artwork-cols-4 .artwork-item.zoomed video {
+        transform: scale(2.15);
+    }
+}
+
+/* Compact strip of square thumbnails (Client Commissions). */
+.artwork-display.artwork-thumbs {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* Each tile is a square frame; the image is absolutely positioned inside it
+   so on hover it can grow past the frame to its natural aspect ratio (--ar,
+   set inline per item), uncropping into the full picture. Width/height
+   transition instead of transform so the crop itself morphs. */
+.artwork-thumbs .artwork-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+}
+
+.artwork-thumbs img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    transform: translate(-50%, -50%);
+    transition: width .35s ease, height .35s ease, box-shadow .35s ease;
+}
+
+.artwork-thumbs .artwork-item:hover img {
+    width: 280%;
+    height: calc(280% / (var(--ar)));
+    transform: translate(-50%, -50%);
+}
+
+/* Edge tiles grow inward so the preview doesn't run off the content edge.
+   Per row (7n) rather than first/last-child so strips that wrap onto a
+   second row are covered too. */
+.artwork-thumbs .artwork-item:nth-child(7n + 1) img {
+    left: 0;
+    transform: translate(0, -50%);
+}
+
+.artwork-thumbs .artwork-item:nth-child(7n) img {
+    left: auto;
+    right: 0;
+    transform: translate(0, -50%);
+}
+
+/* Second step after 1s of hovering (app.js adds .zoomed): another 40% on
+   the 280% preview. Grows width/height like the first step; the scale()
+   in .artwork-item.zoomed is outranked here, so tiles keep their
+   translate positioning. */
+.artwork-thumbs .artwork-item.zoomed img {
+    width: 392%;
+    height: calc(392% / (var(--ar)));
+}
+
+@media (max-width: 768px) {
+    .artwork-display.artwork-thumbs {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .artwork-thumbs .artwork-item:nth-child(4n + 1) img {
+        left: 0;
+        transform: translate(0, -50%);
+    }
+
+    .artwork-thumbs .artwork-item:nth-child(4n) img {
+        left: auto;
+        right: 0;
+        transform: translate(0, -50%);
+    }
 }
 
 @media (max-width: 768px) {
